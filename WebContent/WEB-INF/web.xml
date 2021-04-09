@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" id="WebApp_ID" version="3.1">
+  <display-name>JSPWeb</display-name>
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+  </welcome-file-list>
+  <!-- 서블릿 연동 -->
+  <servlet>
+  	<servlet-name>hello</servlet-name><!--하단 클래스의 이름  -->
+  	<servlet-class>temp.HelloServlet</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+  	<servlet-name>hello</servlet-name><!--위에 클래스이름과 같은이름줘야한다  -->
+  	<url-pattern>/HelloServlet</url-pattern><!--패턴은 몇개줘도 상관없다  -->
+  	<url-pattern>/test</url-pattern> 
+  	
+  	<!--1.url이 들어오고 HelloServlet의 같은이름의 servlet을 찾아서 temp경로의 HelloServlet파일을 실행시킨다 -->
+  	<!--처음 브라우저에서 http://java/test.html을 들어가면 test.html 파일을 서버에 요청한다 
+  		서버에서는 그 파일을 찾아서 브라우저(클라이언트)에 전송한다. 그리고 브라우저에서 구동 (브라우저가 구동하는애들:프론트엔드)
+  		
+  		jsp는 java로 변환->다시 class로 컴파일 이 작업을 서버에서 구동 -> 결과만 브라우저에 전송 그래서 서버에서 구동 : 백엔드
+  	-->
+  	
+  </servlet-mapping>
+</web-app>

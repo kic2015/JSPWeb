@@ -1,0 +1,79 @@
+jsp 기초문법
+
+1. <%@ ~%> : directive 태그(설정부)
+		  -page : 페이지에 대한 설정(인코딩타입,파일형식...)
+		  -include : 뭔가 추가할때
+		  -taglib : 태그 추가할때
+		  
+2. <%!  %> : declaration 태그(선언부) -많이 사용 X(코드부에서 선언을 많이하기때문)
+3. <%   %> : scriptlet 태그(코드부)
+4. <%=  %> : expression 태그(표현부)
+
+
+1번 드라이버 연결
+2번 연결객체 얻어오기
+3번 sql 문장만들기
+4번 전송객체 얻어오기(Statement, PreparedStatement)
+5번 전송
+	-executeQuery() : SELECT
+	-int executeUpdate() : INSERT, UPDATE, DELETE
+    결과받아 처리
+6번 닫기(각종 객체들)
+	ResultSet, PreParedStatement, Connenction    
+
+ 시퀀스 생성
+		create sequence 시퀀스명(내맘대로);
+	    시퀀스 번호를 1000부터 시작하고 증가할때마다 100씩 증가한다
+	    create sequence 시퀀스명(내맘대로)
+	    start with 1000 //1000부터 시작
+	    increment by 100; //100단위로 증가
+
+	Statement : 완벽한 sql문장전송
+	PreparedStatement : 미완성된 sql문장
+	CallStatement : PLSql의 function()/procedure() 호출 
+
+executeQuery()(ResultSet형) : select
+executeUpdate()(int형) : insert,update,delete
+
+PreparedStatement 인경우에는 executeQuery를 쓸 수 없다
+
+오라클은 한글이 3bite로 인식되는경우가 있다
+
+
+	전체 구조 파악
+<클라이언트>					<서버>
+			form.jsp(요청) 
+		------------------> form.jsp 
+		<------------------
++form.css
++form.js	(request)
+			form action='server.jsp'		EmpDTO(전송객체) - 이걸통해 서로 데이터를 주고받는다
+		---------------------> server.jsp	<--------->EmpDAO.java
+		<---------------------							(JDBC)---DB
+			response
+
+얻어오는것이 get
+지정하는것이 set
+
+- 요소 값을 얻을때
+$('#id') 요소에 id가 있을때는 #
+$('.class')요소에 class명이 있을때는 .
+$('input[name="check"]') ,$('input[type="button"]')요소에 id,class가 전부 없을경우 name이나 해당 요소 type을 직접 찾아가서 지정
+$('form') form 자체를 가져오고 싶을때
+
+4/7 교육목표
+쿠키,세션,개념이론 Gof패턴(Singleton pattern) ,ajax
+웹은 무조건 싱글톤패턴(하나의객체를 여러번 호출)이어야 한다.객체가 너무 많이 생성되면 서버에 과부하가 걸릴수 있으니까
+예를 들어 100명이 loginservice.jsp에 접속을하면 empDAO객체가 메모리에 100개가 생성되니까
+
+4/9 회원가입 완성(+아이디 중복검사)
+	방명록 완벽하게 만들어놓고 복습, 완벽하게 코드 이해하기
+
+
+쿠키는 서버에서 생성 response를 통해 쿠키를 전송 클라이언트에서 쿠키 저장,한번만 생성하고 매번 쿠키전송
+세션은  서버의 메모리에 저장, object 객체 저장(쿠키는 문자열형태만),브라우저 종료시 세션을 삭제(열어놨을때는 기본적으로 30분)
+로그아웃할때는 Invalidate를 써서 전부 삭제해주고 장바구니는 removeAttribute를 써서 속성만 제거해준다.
+
+04/08 과제 중복확인 여부를 ajax를 이용해서 중복확인 버튼옆에 띄우기
+회원가입 누르면 입력햇던 값들 전부다 데이터베이스에 집어넣기 
+
